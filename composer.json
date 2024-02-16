@@ -1,0 +1,18 @@
+{
+    "name": "marek/phpiggy",
+    "description": "A PHP aplication for tracking expenses.",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Marek Šmarda",
+            "email": "135655698+MarekSmarda001@users.noreply.github.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Framework\\": "src/Framework",
+            "App\\": "src/App"
+        }
+    }
+}
