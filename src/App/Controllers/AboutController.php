@@ -20,7 +20,6 @@ class AboutController
             "about.php",
             [
                 'title' => 'About',
-                'dangerousData' => '<script>alert(123)</script>'
             ]
         );
     }
