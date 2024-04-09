@@ -2,11 +2,12 @@
 
 namespace Framework;
 
-use PDO, PDOException;
+use PDO, PDOException, PDOStatement;
 
 class Database
 {
     private $connection;
+    private PDOStatement $stmt;
 
     public function __construct($driver, array $config, $username, $password)
     {
@@ -14,13 +15,29 @@ class Database
         $configString = http_build_query($config, "", ';');
         $dsn = "{$driver}:{$configString}";
         try {
-            $this->connection = new PDO($dsn, $username, $password);
+            $this->connection = new PDO(
+                $dsn,
+                $username,
+                $password,
+                [PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]
+            );
         } catch (PDOException $e) {
             die("Could not connect to database");
         }
     }
-    public function query($query)
+    public function query($query, $params = [])
     {
-        $this->connection->query($query);
+        $this->stmt  = $this->connection->prepare($query);
+        $this->stmt->execute($params);
+
+        return $this;
+    }
+    public function count()
+    {
+        return $this->stmt->fetchColumn();
+    }
+    public function find()
+    {
+        return $this->stmt->fetch();
     }
 }

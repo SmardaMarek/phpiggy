@@ -62,7 +62,7 @@ class Container
         }
 
         $factory = $this->definitions[$id];
-        $dependecy = $factory();
+        $dependecy = $factory($this);
 
         $this->resolved[$id] = $dependecy;
 
