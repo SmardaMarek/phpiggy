@@ -48,4 +48,9 @@ class RegisterController
         $this->userService->login($_POST);
         redirectTo('/');
     }
+    public function logout()
+    {
+        $this->userService->logout();
+        redirectTo('/');
+    }
 }
