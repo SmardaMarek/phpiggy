@@ -6,6 +6,7 @@ use Framework\App;
 use App\Controllers\HomeController;
 use App\Controllers\AboutController;
 use App\Controllers\RegisterController;
+use App\Controllers\TransactionController;
 use App\Middleware\AuthRequiredMiddleware;
 use App\Middleware\GuestOnlyMiddleware;
 
@@ -18,4 +19,9 @@ function registerRoutes(App $app)
     $app->get('/login', [RegisterController::class, 'loginView'])->add(GuestOnlyMiddleware::class);
     $app->post('/login', [RegisterController::class, 'login'])->add(GuestOnlyMiddleware::class);
     $app->get('/logout', [RegisterController::class, 'logout'])->add(AuthRequiredMiddleware::class);
+    $app->get('/transactions', [TransactionController::class, 'createView'])->add(AuthRequiredMiddleware::class);
+    $app->post('/transactions', [TransactionController::class, 'create'])->add(AuthRequiredMiddleware::class);
+    $app->get('/transactions/{transaction}', [TransactionController::class, 'editView'])->add(AuthRequiredMiddleware::class);
+    $app->post('/transactions/{transaction}', [TransactionController::class, 'edit'])->add(AuthRequiredMiddleware::class);
+    $app->delete('/transactions/{transaction}', [TransactionController::class, 'delete'])->add(AuthRequiredMiddleware::class);
 }

@@ -7,7 +7,7 @@ use PDO, PDOException, PDOStatement;
 class Database
 {
     private $connection;
-    private PDOStatement $stmt;
+    private  $stmt;
 
     public function __construct($driver, array $config, $username, $password)
     {
@@ -43,5 +43,9 @@ class Database
     public function id()
     {
         return $this->connection->lastInsertId();
+    }
+    public function findAll()
+    {
+        return $this->stmt->fetchAll();
     }
 }
