@@ -7,6 +7,7 @@ use App\Config\Paths;
 use App\Services\ValidatorService;
 use App\Services\UserService;
 use App\Services\TransactionService;
+use App\Services\ReceiptService;
 
 return [
     TemplateEngine::class => fn () => new TemplateEngine(Paths::getViewPath()),
@@ -29,5 +30,9 @@ return [
     TransactionService::class => function (Container $container) {
         $db = $container->get(Database::class);
         return new TransactionService($db);
+    },
+    ReceiptService::class => function (Container $container) {
+        $db = $container->get(Database::class);
+        return new ReceiptService($db);
     }
 ];

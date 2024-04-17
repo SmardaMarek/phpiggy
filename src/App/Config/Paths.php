@@ -18,4 +18,8 @@ class Paths
     {
         return __DIR__ . '/../../../';
     }
+    public static function getStorageUploadsPath()
+    {
+        return __DIR__ . '/../../../storage/uploads';
+    }
 }
